@@ -5,19 +5,19 @@ setup(
     name = 'simple-crypt',
     keywords = ['aes', 'encrypt', 'decrypt', 'encryption', 'decryption', 'pbkdf2', 'hmac', 'secure', 'crypto', 'cryptography'],
     url = 'https://github.com/andrewcooke/simple-crypt',
-    requires = 'pycrypto',
-    install_requires = ['pycrypto'],
+    requires = 'pycryptodome',
+    install_requires = ['pycryptodome'],
     packages = ['simplecrypt'],
     package_dir = {'': 'src'},
-    version = '4.1.7',
-    description = 'Simple, secure encryption and decryption for Python 2.7 and 3',
+    version = '5.0.0',
+    description = 'Simple, secure encryption and decryption for Python 3. Tested on Python 3.7.4',
     author = 'Andrew Cooke',
     author_email = 'andrew@acooke.org',
     classifiers = ['Development Status :: 5 - Production/Stable',
                    'Intended Audience :: Developers',
                    'License :: Public Domain',
-                   'Programming Language :: Python :: 3',
-                   'Programming Language :: Python :: 2.7',
+                   'Programming Language :: Python :: 3.7',
+                   'Programming Language :: Python :: 3.4',
                    'Topic :: Security',
                    'Topic :: Security :: Cryptography',
                    'Topic :: Software Development'],
@@ -42,7 +42,7 @@ Why Should I Use Simple Crypt?
   recommendations `here
   <http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html>`_.
 
-* The established, efficient `pycrypto <https://www.dlitz.net/software/pycrypto>`_
+* The `pycryptodome <https://github.com/Legrandin/pycryptodome>`_
   library provides the algorithm implementations (the cipher used is AES256).
 
 * It includes a check (an HMAC with SHA256) to warn when ciphertext
@@ -66,7 +66,7 @@ Why Should I Use Simple Crypt?
 What Else Should I Know?
 ------------------------
 
-* You must also install ``pycrypto``.  **Note** that pycrypto has
+* You must also install ``pycryptodome``.  **Note** that pycryptodome has
   parts written in C so requires a full python install.  On some unix
   systems that may mean adding a package like ``python-dev`` from your
   package manager.
@@ -86,7 +86,9 @@ What Else Should I Know?
   latest version).
 
 * (c) 2012-2015 Andrew Cooke, andrew@acooke.org;
-  2013 `d10n <https://github.com/d10n>`_, david@bitinvert.com.
+  2013 `d10n <https://github.com/d10n>`_, david@bitinvert.com;
+  2020 `KyleKing <https://github.com/KyleKing>`_,
+  KyleKing@users.noreply.github.com.
   Released into the public domain for any use, but with absolutely no warranty.
 '''
 )

@@ -25,6 +25,7 @@ pip-log.txt
 .coverage
 .tox
 nosetests.xml
+.noseids
 
 # Translations
 *.mo
@@ -34,7 +35,11 @@ nosetests.xml
 .project
 .pydevproject
 
+# Test files
+src/simplecrypt/encrypted.txt
+
 .idea
+.vscode
 *.iml
 env*
 *~

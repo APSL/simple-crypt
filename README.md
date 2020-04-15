@@ -1,13 +1,13 @@
 # simple-crypt
 
-Simple, secure encryption and decryption for Python 2.7 and 3.
+Simple, secure encryption and decryption for Python 3. Tested on Python 3.7.4
 
 Now on [pypi](http://pypi.python.org/pypi/simple-crypt):
 ```pip install simple-crypt```
 (note that the pypi name includes a hyphen).
 
 This provides two functions, which encrypt and decrypt data, delegating all
-the hard work to the [pycrypto](https://www.dlitz.net/software/pycrypto)
+the hard work to the [pycryptodome](https://github.com/Legrandin/pycryptodome)
 library (which must also be installed).
 
 ## Examples
@@ -182,7 +182,7 @@ those found here.
 ## Algorithms
 
 The algorithms used follow the recommendations at
-http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html 
+http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
 and http://www.daemonology.net/blog/2009-06-24-encrypt-then-mac.html,
 as far as I can tell:
 
@@ -255,13 +255,18 @@ I (Andrew Cooke) am not sure Python 2.7 support is such a good idea.  You should
 really use something like [keyczar](http://www.keyczar.org/).  But there seems
 to be a demand for this, so better the devil you know...
 
+Release 5.0 replaced `pycrypto` with `pycryptodome`, a drop-in replacement that
+is actively maintained. `pycryptodome` only supports Python 3.4 and above, so
+support for Python 2.7 was dropped in this release (tested with Python 3.7.4).
+Release 5.0 is backward compatible with output from release 2.0 - 4.1.7.
+
 ## Warnings
 
 1. The whole idea of encrypting with a password is not so smart these days.
    If you think you need to do this, try reading about Google's
    [keyczar](http://www.keyczar.org/) which instead uses a keystore
-   (unfortunately, at the time of writing, keyczar does not support Python 3,
-   as far as I can tell, but that should change soon).
+   (note that keyczar is replaced by [tink](https://github.com/google/tink),
+    which has ongoing development to support Python).
 
 2. When you call these routines the password is stored in memory as a Python
    string.  This means that malicious code running on the same machine might
@@ -284,5 +289,6 @@ to be a demand for this, so better the devil you know...
    data to be silently truncated at the end of a block).
 
 (c) 2012-2015 Andrew Cooke, andrew@acooke.org; 2013
-[d10n](https://github.com/d10n), david@bitinvert.com.  Released into the
-public domain for any use, but with absolutely no warranty.
+[d10n](https://github.com/d10n), david@bitinvert.com; 2020
+[KyleKing](https://github.com/KyleKing), KyleKing@users.noreply.github.com.
+Released into the public domain for any use, but with absolutely no warranty.
