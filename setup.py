@@ -87,8 +87,7 @@ What Else Should I Know?
 
 * (c) 2012-2015 Andrew Cooke, andrew@acooke.org;
   2013 `d10n <https://github.com/d10n>`_, david@bitinvert.com;
-  2020 `KyleKing <https://github.com/KyleKing>`_,
-  KyleKing@users.noreply.github.com.
+  2020 `KyleKing <https://github.com/KyleKing>`.
   Released into the public domain for any use, but with absolutely no warranty.
 '''
 )

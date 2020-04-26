@@ -142,7 +142,7 @@ reading...
 read 10 green bottles from encrypted.txt
 writing...
 wrote 9 green bottles to encrypted.txt
-> 
+>
 ...
 > python3 src/simplecrypt/example-file.py
 reading...
@@ -275,7 +275,7 @@ Release 5.0 is backward compatible with output from release 2.0 - 4.1.7.
    of your code run as a separate process that exists for a limited time.
 
 3. All encrypted messages start with a 4 byte header (ASCII "sc", followed
-   by the version number).  So an adversary is able to recognize that the 
+   by the version number).  So an adversary is able to recognize that the
    data are encrypted (and not simply random).  You can avoid this by discarding
    the first 4 bytes of the encrypted data, but you must of course replace them
    before decrypting, and the code will not inter-operate between versions.
@@ -290,5 +290,5 @@ Release 5.0 is backward compatible with output from release 2.0 - 4.1.7.
 
 (c) 2012-2015 Andrew Cooke, andrew@acooke.org; 2013
 [d10n](https://github.com/d10n), david@bitinvert.com; 2020
-[KyleKing](https://github.com/KyleKing), KyleKing@users.noreply.github.com.
+[KyleKing](https://github.com/KyleKing).
 Released into the public domain for any use, but with absolutely no warranty.
