@@ -1,6 +1,6 @@
 # simple-crypt
 
-Simple, secure encryption and decryption for Python 3. Tested on Python 3.7.4
+Simple, secure encryption and decryption for Python 3.
 
 Now on [pypi](http://pypi.python.org/pypi/simple-crypt):
 ```pip install simple-crypt```
@@ -228,6 +228,11 @@ attacks (see link above or chapter 7 of Practical Cryptography).
 
 ## Latest News
 
+Release 5.0 replaced `pycrypto` with `pycryptodome`, a drop-in replacement that
+is actively maintained. `pycryptodome` only supports Python 3.4 and above, so
+support for Python 2.7 was dropped in this release. Release 5.0 is backward
+compatible with output from release 2.0 - 4.1.7.
+
 Release 4.1 obscures the output of the random number generator.  This should
 not be necessary, but guards against a possible attack if the random number
 generator is compromised in some way.  Functionality and interoperability are
@@ -254,11 +259,6 @@ with Python 2.7.5, 3.0.1 and 3.3.2).
 I (Andrew Cooke) am not sure Python 2.7 support is such a good idea.  You should
 really use something like [keyczar](http://www.keyczar.org/).  But there seems
 to be a demand for this, so better the devil you know...
-
-Release 5.0 replaced `pycrypto` with `pycryptodome`, a drop-in replacement that
-is actively maintained. `pycryptodome` only supports Python 3.4 and above, so
-support for Python 2.7 was dropped in this release (tested with Python 3.7.4).
-Release 5.0 is backward compatible with output from release 2.0 - 4.1.7.
 
 ## Warnings
 
@@ -289,6 +289,6 @@ Release 5.0 is backward compatible with output from release 2.0 - 4.1.7.
    data to be silently truncated at the end of a block).
 
 (c) 2012-2015 Andrew Cooke, andrew@acooke.org; 2013
-[d10n](https://github.com/d10n), david@bitinvert.com; 2020
+[d10n](https://github.com/d10n), david@bitinvert.com; 2020-2021
 [KyleKing](https://github.com/KyleKing).
 Released into the public domain for any use, but with absolutely no warranty.
