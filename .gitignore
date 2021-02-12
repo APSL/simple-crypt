@@ -40,6 +40,7 @@ src/simplecrypt/encrypted.txt
 
 .idea
 .vscode
+cov_html
 *.iml
 env*
 *~
