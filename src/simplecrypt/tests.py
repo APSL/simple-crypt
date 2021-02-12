@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+import unittest
 from binascii import hexlify
 
 from functools import reduce
 from unittest import TestCase, main
 
+from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
+from Crypto.Util import Counter
 from math import sqrt
 
 from simplecrypt import encrypt, decrypt, _expand_keys, DecryptionException, \
-    _random_bytes, HEADER, _assert_header_prefix, \
+    _random_bytes, HEADER, HALF_BLOCK, SALT_LEN, _assert_header_prefix, \
     _assert_header_version, LATEST, HEADER_LEN, _hide
 
 
@@ -129,38 +132,36 @@ class TestEncryption(TestCase):
             assert 'format' not in str(e), e
 
 
-# # From pyCryptoDome, `ctr` used to be a callable object, but now it is just a dictionary for backward compatibility
-# # FYI: I'm not yet sure how to port this test to pyCryptoDome and commented them out for now
-# from Crypto.Cipher import AES
-# from Crypto.Util import Counter
-# from simplecrypt import HALF_BLOCK, SALT_LEN
-# class TestCounter(TestCase):
-#
-#     def test_wraparound(self):
-#         # https://bugs.launchpad.net/pycrypto/+bug/1093446
-#         ctr = Counter.new(8, initial_value=255, allow_wraparound=False)
-#         try:
-#             ctr()
-#             ctr()
-#             assert False, 'expected error'
-#         except Exception as e:
-#             assert 'wrapped' in str(e), e
-#         ctr = Counter.new(8, initial_value=255, allow_wraparound=True)
-#         ctr()
-#         ctr()
-#         ctr = Counter.new(8, initial_value=255)
-#         try:
-#             ctr()
-#             ctr()
-#             assert False, 'expected error'
-#         except Exception as e:
-#             assert 'wrapped' in str(e), e
-#
-#     def test_prefix(self):
-#         salt = _random_bytes(SALT_LEN[LATEST]//8)
-#         ctr = Counter.new(HALF_BLOCK, prefix=salt[:HALF_BLOCK//8])
-#         count = ctr()
-#         assert len(count) == AES.block_size, count
+# From pyCryptoDome, `ctr` used to be a callable object, but now it is just a dictionary for backward compatibility
+# FYI: I'm not yet sure how to port this test to pyCryptoDome and skipped for now
+@unittest.skip('Test needs to be updated for pyCryptoDome. See comments')
+class TestCounter(TestCase):
+
+    def test_wraparound(self):
+        # https://bugs.launchpad.net/pycrypto/+bug/1093446
+        ctr = Counter.new(8, initial_value=255, allow_wraparound=False)
+        try:
+            ctr()
+            ctr()
+            assert False, 'expected error'
+        except Exception as e:
+            assert 'wrapped' in str(e), e
+        ctr = Counter.new(8, initial_value=255, allow_wraparound=True)
+        ctr()
+        ctr()
+        ctr = Counter.new(8, initial_value=255)
+        try:
+            ctr()
+            ctr()
+            assert False, 'expected error'
+        except Exception as e:
+            assert 'wrapped' in str(e), e
+
+    def test_prefix(self):
+        salt = _random_bytes(SALT_LEN[LATEST]//8)
+        ctr = Counter.new(HALF_BLOCK, prefix=salt[:HALF_BLOCK//8])
+        count = ctr()
+        assert len(count) == AES.block_size, count
 
 
 class TestRandBytes(TestCase):
