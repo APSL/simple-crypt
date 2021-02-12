@@ -4,13 +4,11 @@ from binascii import hexlify
 from functools import reduce
 from unittest import TestCase, main
 
-from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
-from Crypto.Util import Counter
 from math import sqrt
 
 from simplecrypt import encrypt, decrypt, _expand_keys, DecryptionException, \
-    _random_bytes, HEADER, HALF_BLOCK, SALT_LEN, _assert_header_prefix, \
+    _random_bytes, HEADER, _assert_header_prefix, \
     _assert_header_version, LATEST, HEADER_LEN, _hide
 
 
@@ -132,7 +130,10 @@ class TestEncryption(TestCase):
 
 
 # # From pyCryptoDome, `ctr` used to be a callable object, but now it is just a dictionary for backward compatibility
-# # I'm not sure if these tests are still relevant and commented them out for now
+# # FYI: I'm not yet sure how to port this test to pyCryptoDome and commented them out for now
+# from Crypto.Cipher import AES
+# from Crypto.Util import Counter
+# from simplecrypt import HALF_BLOCK, SALT_LEN
 # class TestCounter(TestCase):
 #
 #     def test_wraparound(self):
@@ -236,28 +237,13 @@ class TestBackwardsCompatibility(TestCase):
         assert ptext == b'message', ptext
 
 
-try:
+class TestPython3Syntax(TestCase):
 
-    unicode()  # succeeds in 2.7
-
-    class TestPython27Syntax(TestCase):
-
-        def test_python27(self):
-            ptext = decrypt('password', encrypt('password', 'message'))
-            assert ptext == 'message', ptext
-            # this needs to be commented out when testing with 3.0 (syntax error)
-            ptext = decrypt(u'password', encrypt(u'password', u'message'))
-            assert ptext == u'message', ptext
-
-except NameError:
-
-    class TestPython3Syntax(TestCase):
-
-        def test_python3(self):
-            ptext = decrypt(b'password', encrypt(b'password', b'message'))
-            assert ptext == b'message', ptext
-            ptext = decrypt('password', encrypt('password', 'message')).decode('utf8')
-            assert ptext == 'message', ptext
+    def test_python3(self):
+        ptext = decrypt(b'password', encrypt(b'password', b'message'))
+        assert ptext == b'message', ptext
+        ptext = decrypt('password', encrypt('password', 'message')).decode('utf8')
+        assert ptext == 'message', ptext
 
 
 if __name__ == '__main__':
